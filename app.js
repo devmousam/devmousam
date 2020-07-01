@@ -8,41 +8,6 @@ const hbs = require('express-handlebars');
 const EventEmitter = require('events');
 const emitter = new EventEmitter();
 
-// Emitter example
-emitter.on('messageLogged', function(){
-  console.log("messaged logged successfully");
-})
-
-emitter.emit('messageLogged');
-
-// Callback example
-const doCallback = (callback) => {
-  setTimeout(() => {
-      callback("There have some error",undefined);
-  },2000)
-}
-
-
-doCallback((error, result) => {
-   if(error) {
-      console.log(error);
-   }
-});
-
-// Promises example
-const doPromises = new Promise((resolved, rejected) => {
-   setTimeout(()=>{
-      resolved("The promise issue is solved");
-   },2000)
-});
-
-doPromises.then((result) => {
-  console.log(result);
-}).catch((error) => {
-  console.log(error);
-});
-
-
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({extended:true}));
 
@@ -63,46 +28,7 @@ app.listen('5000',function(){
 	})
 })
 
-// Sample APIs
-app.post('/register', function(req, res){
-    collection.insert(req.body, function(error, result){
-    	if(error) {
-    		return res.status(500).send(error);
-    	}
 
-    	res.send(result);
-    })
-})
-
-app.post('/register', function(req, res){
-    collection.insert(req.body, function(error, result){
-    	if(error) {
-    		return res.status(500).send(error);
-    	}
-
-    	res.send(result);
-    })
-})
-
-app.get('/customers', function(req, res){
-    collection.find({}).toArray(function(error, result){
-       if(error) {
-       	    return res.status(500).send(error);
-       }
-
-       res.send(result);
-    })
-})
-
-app.get('/customers/:id', function(req, res){
-    collection.findOne({"_id": new ObjectId(req.params.id)}, function(error, result) {
-    	if(error) {
-    	    return res.status(500).send(error);
-    	}
-
-    	res.send(result);
-    })
-})
 
 // view engine setup
 app.set('view engine', 'hbs');
@@ -124,76 +50,27 @@ app.engine( 'hbs', hbs({
 }))
 
 
-// app.get('/', function(req, res) {
-//   res.render('home', {layout: 'main', template: 'home-template'});
-// });
-
 app.get('/', (req, res) => {
     res.render('home', {
       post: [
             {
-              author: 'Janith Kasun',
-              image: 'https://picsum.photos/500/500',
-              comments: [
-                'This is the first comment',
-                'This is the second comment',
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec fermentum ligula. Sed vitae erat lectus.'
-              ]
-            },
-            {
-              author: 'Mousam Kasun',
-              image: 'https://picsum.photos/500/500',
-              comments: [
-                'This is the first comment',
-                'This is the second comment',
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec fermentum ligula. Sed vitae erat lectus.'
-              ]
-            },
-            {
-              author: 'Mousam Kasun',
-              image: 'https://picsum.photos/500/500',
-              comments: [
-                'This is the first comment',
-                'This is the second comment',
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec fermentum ligula. Sed vitae erat lectus.'
-              ]
-            },
-            {
-              author: 'Mousam Kasun',
-              image: 'https://picsum.photos/500/500',
-              comments: [
-                'This is the first comment',
-                'This is the second comment',
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec fermentum ligula. Sed vitae erat lectus.'
-              ]
-            },
-            {
-              author: 'Mousam Kasun',
-              image: 'https://picsum.photos/500/500',
-              comments: [
-                'This is the first comment',
-                'This is the second comment',
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec fermentum ligula. Sed vitae erat lectus.'
-              ]
-            },
-            {
-              author: 'Mousam Kasun',
-              image: 'https://picsum.photos/500/500',
-              comments: [
-                'This is the first comment',
-                'This is the second comment',
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec fermentum ligula. Sed vitae erat lectus.'
-              ]
-            },
-            {
-              author: 'Mousam Kasun',
-              image: 'https://picsum.photos/500/500',
-              comments: [
-                'This is the first comment',
-                'This is the second comment',
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum nec fermentum ligula. Sed vitae erat lectus.'
-              ]
+              author: 'Mousam Roy',
+              title: 'Docker with Magento 2 on centOS',
+              body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+              url: "/post/2"
             }
+            ]
+    });
+});
+
+app.get('/post/:id', (req, res) => {
+    res.render('post', {
+      post: [
+              {
+                author: 'Mousam Roy',
+                title: 'Docker with Magento 2 on centOS',
+                body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+              }
             ]
     });
 });
