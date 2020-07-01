@@ -1,0 +1,41 @@
+<!--<div class="posts">
+    <div class="row justify-content-center">
+        {{#each post}}
+		        <div class="col-lg-7" style="margin-top: 50px;">
+		            <div class="card">
+		                <img src="{{this.image}}" class="card-img-top" alt="...">
+		                <div class="card-body">
+		                    <h5 class="card-title">Posted by {{this.author}}</h5>
+
+		                    {{#if this.comments}}
+		                    <ul class="list-group">
+		                        {{#each this.comments}}
+		                           <li class="list-group-item">{{getShortComment this}}</li>
+		                        {{/each}}
+		                    </ul>
+		                    {{else}}
+		                    <ul class="list-group">
+		                        <li class="list-group-item">Be first to comment on this post</li>
+		                    </ul>
+		                    {{/if}}
+		                </div>
+		            </div>
+		        </div>
+        {{/each}}
+    </div>
+</div> -->
+
+<div class="container my-4">
+	<div class="card-columns text-white">
+		{{#each post}}
+		  <div class="card mt-2 mb-3 text-white bg-primary">
+		    <div class="card-header">Header</div>
+		    <div class="card-body">
+		      <h5 class="card-title">Panel title that wraps to a new line</h5>
+		      <p>This is a longer card with supporting text below as a natural lead-in to additional content. This content
+		        is a little bit longer.</p>
+		    </div>
+		  </div>
+		{{/each}}
+	</div>
+</div>
